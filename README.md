@@ -1,6 +1,6 @@
 # 2026 - Goal Planner PWA 🚀
 
-![2026 Goal Planner](public/icons/icon-512x512.png)
+![2026 Goal Planner Screenshot](public/screenshot.png)
 
 **Design Your Future.** 2026 is a premium, offline-first Progressive Web App (PWA) designed to help you track your goals, celebrate milestones, and build the life you dream of.
 
@@ -21,7 +21,7 @@
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16.1](https://nextjs.org/) (App Router)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Components**: [Shadcn UI](https://ui.shadcn.com/)
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand)
@@ -40,8 +40,8 @@
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/2026.git
-    cd 2026
+    git clone https://github.com/waelmanai/Goal-Planner.git
+    cd Goal-Planner
     ```
 
 2.  **Install dependencies:**
@@ -81,6 +81,7 @@ docker-compose up -d
 **Wael Manai**
 
 - Portfolio: [https://wael-manai.framer.website/](https://wael-manai.framer.website/)
+- GitHub: [https://github.com/waelmanai](https://github.com/waelmanai)
 
 ## 📄 License
 
