@@ -51,38 +51,38 @@ export function CategoryList() {
             </div>
 
             {categories.length === 0 ? (
-                <div className="text-center py-16 bg-muted/20 rounded-2xl border-2 border-dashed border-muted-foreground/10">
+                <div className="text-center py-12 md:py-16 bg-muted/20 rounded-2xl border-2 border-dashed border-muted-foreground/10 mx-2 md:mx-0">
                     <div className="bg-background p-4 rounded-full inline-flex mb-4 shadow-sm">
                         <FolderOpen className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">No categories yet</h3>
-                    <p className="text-muted-foreground mb-6 max-w-sm mx-auto">Create your first category to start organizing your goals and dreams.</p>
-                    <div className="max-w-xs mx-auto">
+                    <p className="text-muted-foreground mb-6 max-w-sm mx-auto px-4">Create your first category to start organizing your goals and dreams.</p>
+                    <div className="max-w-xs mx-auto px-4">
                         <AddCategoryDialog />
                     </div>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-10">
+                <div className="grid grid-cols-1 gap-6 md:gap-10">
                     {categories.map((category) => {
                         const categoryGoals = goals.filter((g) => g.categoryId === category.id);
 
                         return (
-                            <div key={category.id} className="space-y-6">
-                                <div className="flex items-center justify-between bg-card p-5 rounded-2xl border shadow-sm hover:shadow-md transition-all group">
+                            <div key={category.id} className="space-y-4 md:space-y-6">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-card p-4 md:p-5 rounded-2xl border shadow-sm hover:shadow-md transition-all group gap-4 sm:gap-0">
                                     <div className="flex items-center space-x-4">
                                         <div
-                                            className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm ring-1 ring-black/5 dark:ring-white/10"
+                                            className="w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-lg md:text-xl shadow-sm ring-1 ring-black/5 dark:ring-white/10"
                                             style={{ backgroundColor: category.color || '#e5e7eb' }}
                                         >
                                             {category.icon || "📁"}
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-xl leading-none tracking-tight">{category.name}</h3>
-                                            <p className="text-sm text-muted-foreground mt-1.5 font-medium">{categoryGoals.length} Goals</p>
+                                            <h3 className="font-bold text-lg md:text-xl leading-none tracking-tight">{category.name}</h3>
+                                            <p className="text-xs md:text-sm text-muted-foreground mt-1 md:mt-1.5 font-medium">{categoryGoals.length} Goals</p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                                    <div className="flex items-center gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity self-end sm:self-auto">
                                         <AddGoalDialog categoryId={category.id} />
 
                                         <AlertDialog>

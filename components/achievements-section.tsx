@@ -81,7 +81,7 @@ export function AchievementsSection() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                 {ALL_ACHIEVEMENTS.map((achievement) => {
                     const unlocked = achievements.find(a => a.id === achievement.id);
                     const Icon = iconMap[achievement.icon] || Star;
