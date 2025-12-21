@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 2026 - Goal Planner PWA 🚀
 
-## Getting Started
+![2026 Goal Planner](public/icons/icon-512x512.png)
 
-First, run the development server:
+**Design Your Future.** 2026 is a premium, offline-first Progressive Web App (PWA) designed to help you track your goals, celebrate milestones, and build the life you dream of.
+
+## ✨ Features
+
+- **Offline-First Architecture**: Built with IndexedDB, your data lives on your device. Works perfectly without an internet connection.
+- **Goal Management**: Create, update, and delete goals with ease.
+- **Smart Progress Tracking**:
+  - **Numeric Goals**: Track specific targets (e.g., "Read 10 books").
+  - **Milestone Goals**: Break down complex goals into checklist items.
+- **Gamification**: Unlock achievements and badges as you progress.
+  - **Hall of Fame**: Showcase your "Visionary", "Achiever", and "Unstoppable" badges.
+- **Premium UI**:
+  - **Glassmorphism**: Modern, semi-transparent card designs.
+  - **Animations**: Smooth transitions and hover effects.
+  - **Responsive**: Looks great on mobile, tablet, and desktop.
+- **PWA Support**: Installable on iOS, Android, and Desktop.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Components**: [Shadcn UI](https://ui.shadcn.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Local Database**: [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) (via `idb`)
+- **Backend (Optional)**: PostgreSQL + Prisma (Dockerized)
+- **Validation**: Zod + React Hook Form
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Docker (optional, for PostgreSQL)
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/2026.git
+    cd 2026
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    pnpm install
+    ```
+
+3.  **Set up Environment Variables:**
+    Create a `.env` file in the root directory:
+    ```env
+    DATABASE_URL="postgresql://user:password@localhost:5432/2026_db"
+    ```
+
+4.  **Start the Development Server:**
+    ```bash
+    npm run dev
+    ```
+
+5.  **Build for Production:**
+    ```bash
+    npm run build
+    npm start
+    ```
+
+## 🐳 Docker Setup (Optional)
+
+To run the PostgreSQL database locally:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker-compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 👨‍💻 Author
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Wael Manai**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Portfolio: [https://wael-manai.framer.website/](https://wael-manai.framer.website/)
 
-## Learn More
+## 📄 License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

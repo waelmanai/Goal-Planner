@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String?  // Lucide icon name
+  color     String?  // Hex color
+  goals     Goal[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Goal {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  categoryId  String
+  category    Category      @relation(fields: [categoryId], references: [id])
+  targetValue Float?        // e.g. 10000 (currency) or 100 (percent)
+  currentValue Float        @default(0)
+  unit        String?       // e.g. "USD", "Hours", "%"
+  deadline    DateTime?
+  isCompleted Boolean       @default(false)
+  logs        ProgressLog[]
+  milestones  Milestone[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model ProgressLog {
+  id        String   @id @default(cuid())
+  goalId    String
+  goal      Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  value     Float    // The value added or set
+  note      String?
+  date      DateTime @default(now())
+}
+
+model Milestone {
+  id          String   @id @default(cuid())
+  title       String
+  isCompleted Boolean  @default(false)
+  goalId      String
+  goal        Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String   // Lucide icon name
+  unlockedAt  DateTime @default(now())
+}
