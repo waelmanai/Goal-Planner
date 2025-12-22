@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Target, Trophy } from "lucide-react";
+import { LayoutDashboard, Target, Trophy, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function BottomNav() {
@@ -23,6 +23,11 @@ export function BottomNav() {
             href: "/achievements",
             label: "Awards",
             icon: Trophy,
+        },
+        {
+            href: "/settings",
+            label: "Settings",
+            icon: Settings,
         },
     ];
 

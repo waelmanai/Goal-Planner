@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Target, Trophy, Sparkles } from "lucide-react";
+import { LayoutDashboard, Target, Trophy, Sparkles, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
 
@@ -24,6 +24,11 @@ export function SiteHeader() {
             href: "/achievements",
             label: "Awards",
             icon: Trophy,
+        },
+        {
+            href: "/settings",
+            label: "Settings",
+            icon: Settings,
         },
     ];
 

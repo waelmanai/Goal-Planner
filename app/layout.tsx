@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 import { SiteHeader } from "@/components/site-header";
 import { BottomNav } from "@/components/bottom-nav";
 import { ThemeProvider } from "@/components/theme-provider";
+import { OnboardingDialog } from "@/components/onboarding-dialog";
 
 export default function RootLayout({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout({
               {children}
             </main>
             <BottomNav />
+            <OnboardingDialog />
           </div>
         </ThemeProvider>
       </body>
