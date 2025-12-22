@@ -1,8 +1,10 @@
 "use client";
 
-import { CategoryList } from "@/components/category-list";
-import { AchievementsSection } from "@/components/achievements-section";
+import { StatsOverview } from "@/components/stats-overview";
 import { Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -21,12 +23,18 @@ export default function Home() {
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
             Track your goals, celebrate milestones, and build the life you dream of. One step at a time.
           </p>
+          <div className="pt-4">
+            <Link href="/goals">
+              <Button size="lg" className="gap-2 rounded-full shadow-lg hover:shadow-xl transition-all">
+                Start Planning <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </section>
 
         {/* Main Content */}
         <div className="grid gap-16">
-          <CategoryList />
-          <AchievementsSection />
+          <StatsOverview />
         </div>
 
         {/* Footer */}
