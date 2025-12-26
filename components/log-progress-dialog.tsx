@@ -54,7 +54,23 @@ export function LogProgressDialog({ goalId, currentValue }: LogProgressDialogPro
         const addedValue = parseFloat(values.value);
         if (isNaN(addedValue)) return;
 
-        const newValue = currentValue + addedValue;
+        // Check if goal is completed
+        const goal = useStore.getState().goals.find(g => g.id === goalId);
+        if (goal?.isCompleted) {
+            alert("This goal is already completed!");
+            setOpen(false);
+            form.reset();
+            return;
+        }
+
+        let newValue = currentValue + addedValue;
+
+        // Prevent exceeding target value
+        if (goal?.targetValue && newValue > goal.targetValue) {
+            const maxAllowed = goal.targetValue - currentValue;
+            alert(`Cannot exceed target value! Maximum you can add is ${maxAllowed} ${goal.unit || ''}`);
+            return;
+        }
 
         // We should also create a ProgressLog entry in DB, but for now let's just update the goal
         // TODO: Implement addLog in store

@@ -98,7 +98,22 @@ export const useStore = create<AppState>((set, get) => ({
         const goal = state.goals.find((g) => g.id === id);
         if (!goal) return;
 
-        const updatedGoal = { ...goal, ...updates, updatedAt: new Date() };
+        let updatedGoal = { ...goal, ...updates, updatedAt: new Date() };
+
+        // Auto-complete goal if it reaches target value
+        if (updatedGoal.targetValue && updatedGoal.currentValue >= updatedGoal.targetValue) {
+            updatedGoal.isCompleted = true;
+        }
+
+        // Auto-complete milestone-based goals if all milestones are done
+        const goalMilestones = state.milestones.filter(m => m.goalId === id);
+        if (goalMilestones.length > 0) {
+            const allCompleted = goalMilestones.every(m => m.isCompleted);
+            if (allCompleted) {
+                updatedGoal.isCompleted = true;
+            }
+        }
+
         await db.addGoal({ ...updatedGoal, _synced: 0 });
         set((state) => ({
             goals: state.goals.map((g) => (g.id === id ? updatedGoal : g)),
@@ -120,6 +135,16 @@ export const useStore = create<AppState>((set, get) => ({
         set((state) => ({
             milestones: state.milestones.map((m) => (m.id === id ? updatedMilestone : m)),
         }));
+
+        // Check if all milestones for this goal are completed
+        const goalMilestones = state.milestones.map(m => m.id === id ? updatedMilestone : m).filter(m => m.goalId === milestone.goalId);
+        const allCompleted = goalMilestones.every(m => m.isCompleted);
+
+        if (allCompleted) {
+            // Auto-complete the goal
+            await get().updateGoal(milestone.goalId, { isCompleted: true });
+        }
+
         get().checkAchievements();
     },
     deleteCategory: async (id) => {
@@ -148,6 +173,17 @@ export const useStore = create<AppState>((set, get) => ({
             goals: state.goals.filter((g) => g.id !== id),
             milestones: state.milestones.filter((m) => m.goalId !== id)
         }));
+
+        // Reset achievements if no goals remain
+        const remainingGoals = get().goals.filter((g) => g.id !== id);
+        if (remainingGoals.length === 0) {
+            // Clear all achievements from database
+            const achievements = await db.getAchievements();
+            for (const achievement of achievements) {
+                await db.deleteAchievement(achievement.id);
+            }
+            set({ achievements: [] });
+        }
     },
     deleteMilestone: async (id) => {
         await db.deleteMilestone(id);
@@ -197,6 +233,15 @@ export const useStore = create<AppState>((set, get) => ({
         if (newAchievements.length > 0) {
             for (const achievement of newAchievements) {
                 await db.addAchievement({ ...achievement, _synced: 0 });
+
+                // Show toast notification for each achievement
+                if (typeof window !== 'undefined') {
+                    const { toast } = await import('sonner');
+                    toast.success(`🏆 Achievement Unlocked!`, {
+                        description: `${achievement.title}: ${achievement.description}`,
+                        duration: 5000,
+                    });
+                }
             }
             set((state) => ({ achievements: [...state.achievements, ...newAchievements] }));
         }

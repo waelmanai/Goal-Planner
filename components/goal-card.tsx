@@ -32,9 +32,10 @@ interface GoalCardProps {
     currentValue: number;
     targetValue?: number;
     unit?: string;
+    isCompleted: boolean;
 }
 
-export function GoalCard({ id, title, currentValue, targetValue, unit }: GoalCardProps) {
+export function GoalCard({ id, title, currentValue, targetValue, unit, isCompleted }: GoalCardProps) {
     const { milestones, deleteGoal } = useStore();
     const goalMilestones = milestones.filter(m => m.goalId === id);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -55,11 +56,22 @@ export function GoalCard({ id, title, currentValue, targetValue, unit }: GoalCar
 
     return (
         <>
-            <Card className="overflow-hidden transition-all hover:shadow-lg border-muted/60 hover:border-primary/20 group bg-card/50 backdrop-blur-sm">
-                <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2 bg-muted/20 p-4">
-                    <CardTitle className="text-base font-semibold leading-tight pr-4">{title}</CardTitle>
+            <Card className={`overflow-hidden transition-all hover:shadow-lg group bg-card/50 backdrop-blur-sm ${isCompleted
+                    ? 'border-green-500/50 bg-green-500/5'
+                    : 'border-muted/60 hover:border-primary/20'
+                }`}>
+                <CardHeader className={`flex flex-row items-start justify-between space-y-0 pb-2 p-4 ${isCompleted ? 'bg-green-500/10' : 'bg-muted/20'
+                    }`}>
+                    <div className="flex items-center gap-2">
+                        <CardTitle className="text-base font-semibold leading-tight">{title}</CardTitle>
+                        {isCompleted && (
+                            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-500 text-white">
+                                ✓ Completed
+                            </span>
+                        )}
+                    </div>
                     <div className="flex items-center space-x-1">
-                        <LogProgressDialog goalId={id} currentValue={currentValue} />
+                        {!isCompleted && <LogProgressDialog goalId={id} currentValue={currentValue} />}
 
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>

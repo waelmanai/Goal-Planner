@@ -15,6 +15,7 @@ import { SiteHeader } from "@/components/site-header";
 import { BottomNav } from "@/components/bottom-nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { OnboardingDialog } from "@/components/onboarding-dialog";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -38,6 +39,7 @@ export default function RootLayout({
             </main>
             <BottomNav />
             <OnboardingDialog />
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>

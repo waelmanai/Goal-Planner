@@ -118,6 +118,7 @@ export function CategoryList() {
                                             currentValue={goal.currentValue}
                                             targetValue={goal.targetValue}
                                             unit={goal.unit}
+                                            isCompleted={goal.isCompleted}
                                         />
                                     ))}
                                     {categoryGoals.length === 0 && (

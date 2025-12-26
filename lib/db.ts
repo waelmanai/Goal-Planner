@@ -133,4 +133,24 @@ export const db = {
         const db = await initDB();
         return db.getAll('milestones');
     },
+    async addMilestone(milestone: AppDB['milestones']['value']) {
+        const db = await initDB();
+        return db.put('milestones', milestone);
+    },
+    async deleteMilestone(id: string) {
+        const db = await initDB();
+        return db.delete('milestones', id);
+    },
+    async getAchievements() {
+        const db = await initDB();
+        return db.getAll('achievements');
+    },
+    async addAchievement(achievement: AppDB['achievements']['value']) {
+        const db = await initDB();
+        return db.put('achievements', achievement);
+    },
+    async deleteAchievement(id: string) {
+        const db = await initDB();
+        return db.delete('achievements', id);
+    },
 };
